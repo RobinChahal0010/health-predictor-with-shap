@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto text-center py-10">
+
+    <div class="p-6 rounded-2xl shadow-lg mb-6 text-white"
+     style="background-color:
+        {% if prediction == 'High' %}#ef4444;
+        {% elif prediction == 'Medium' %}#f59e0b;
+        {% else %}#22c55e;{% endif %}">
+        <h1>{{ t(lang, "prediction_result") }}</h1>
+        <p>{{ t(lang, "health_risk") }}: <b>{{ prediction }}</b></p>
+        <p>{{ t(lang, "confidence") }}: <b>{{ probability }}%</b></p>
+        <h3>{{ t(lang, "recommendations") }}</h3>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Feature Impact (SHAP)</h2>
+        <div id="shapPlot" style="width:100%; height:450px;"></div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800">AI-Driven Recommendations</h2>
+        <ul class="space-y-3 text-lg text-left">
+            {% for tip in tips %}
+                <li class="px-4 py-3 rounded-lg shadow-sm flex items-center space-x-2
+                    {% if 'negatively affect' in tip %} bg-red-100 text-red-700 {% else %} bg-green-100 text-green-700 {% endif %}">
+                    <span>
+                        {% if "Sleep" in tip %} 🛌
+                        {% elif "Diet" in tip %} 🍎
+                        {% elif "Smoking" in tip %} 🚬
+                        {% elif "Alcohol" in tip %} 🍺
+                        {% elif "Steps" in tip %} 👟
+                        {% elif "Stress" in tip %} 😰
+                        {% elif "Water" in tip %} 💧
+                        {% else %} ✔️
+                        {% endif %}
+                    </span>
+                    <span>
+                        {{ tip.replace("= ", " → ") 
+                               .replace("is supporting your health.", "supports your health.") 
+                               .replace("may negatively affect your health.", "is a risk factor.") 
+                               .replace("Gender", "Sex") }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mt-6 space-x-3">
+
+        <a href="{{ url_for('index') }}" 
+           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md">
+           Try Again
+        </a>
+
+        <form action="{{ url_for('download_report') }}" method="POST" class="inline">
+            <input type="hidden" name="prediction" value="{{ prediction }}">
+            <input type="hidden" name="probability" value="{{ probability }}">
+            <input type="hidden" name="tips" value='{{ tips|tojson }}'>
+            <input type="hidden" name="feature_names" value='{{ feature_names|tojson }}'>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-md">
+                Download Report
+            </button>
+        </form>
+
+        <form id="emailForm" action="{{ url_for('email_result') }}" method="POST" class="inline">
+            <input type="email" name="email" placeholder="Enter your email" required
+                   class="px-2 py-1 rounded border border-gray-300">
+            <input type="hidden" name="prediction" value="{{ prediction }}">
+            <input type="hidden" name="probability" value="{{ probability }}">
+            <input type="hidden" name="tips" value='{{ tips|tojson }}'>
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md">
+                Email Result
+            </button>
+        </form>
+
+    </div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+let shapValues = {{ shap_values|safe }};
+let features = {{ feature_names|safe }};
+
+let colors = shapValues.map(v => v > 0 ? "#f87171" : "#4ade80");
+let data = [{
+    x: Array(shapValues.length).fill(0),
+    y: features,
+    type: 'bar',
+    orientation: 'h',
+    marker: {color: colors}
+}];
+
+let layout = {
+    margin: {l:150, r:50, t:20, b:40},
+    paper_bgcolor: '#f9fafb',
+    plot_bgcolor: '#f9fafb',
+    font: {color: '#111'},
+    xaxis: {zeroline: true, zerolinecolor: '#999'},
+    yaxis: {tickfont: {size: 14}}
+};
+
+Plotly.newPlot('shapPlot', data, layout, {responsive: true});
+
+
+let frameCount = 50;
+let currentFrame = 0;
+function animateBars() {
+    if(currentFrame <= frameCount){
+        let progress = currentFrame / frameCount;
+        let newX = shapValues.map(v => v * progress);
+        Plotly.animate('shapPlot', {
+            data: [{x: newX}]
+        }, {
+            transition: {duration: 40},
+            frame: {duration: 40, redraw: true}
+        });
+        currentFrame++;
+        requestAnimationFrame(animateBars);
+    }
+}
+animateBars();
+</script>
+{% endblock %}

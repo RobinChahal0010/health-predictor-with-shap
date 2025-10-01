@@ -1,0 +1,23 @@
+{
+  "en": {
+    "prediction_result": "Prediction Result",
+    "health_risk": "Health Risk Category",
+    "confidence": "Prediction Confidence",
+    "recommendations": "AI-Driven Recommendations",
+    "try_again": "Try Again"
+  },
+  "hi": {
+    "prediction_result": "पूर्वानुमान परिणाम",
+    "health_risk": "स्वास्थ्य जोखिम श्रेणी",
+    "confidence": "पूर्वानुमान आत्मविश्वास",
+    "recommendations": "एआई संचालित सिफारिशें",
+    "try_again": "फिर से प्रयास करें"
+  },
+  "pa": {
+    "prediction_result": "ਪੇਸ਼ਗੋਈ ਨਤੀਜਾ",
+    "health_risk": "ਸਿਹਤ ਜੋਖਿਮ ਸ਼੍ਰੇਣੀ",
+    "confidence": "ਭਵਿੱਖਬਾਣੀ ਭਰੋਸਾ",
+    "recommendations": "ਏ.ਆਈ. ਅਧਾਰਿਤ ਸਿਫਾਰਸ਼ਾਂ",
+    "try_again": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+  }
+}

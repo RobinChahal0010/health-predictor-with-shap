@@ -1,0 +1,116 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0f0f1a, #1b1b2b);
+    color: #fff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #0a0a14;
+}
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.navbar .nav-links a {
+    color: #ddd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.navbar .nav-links a:hover {
+    color: #fff;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(145deg, #111, #1e1e30);
+}
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.hero p {
+    font-size: 18px;
+    color: #bbb;
+}
+
+/* Form */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #101020;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.health-form {
+    display: flex;
+    flex-direction: column;
+}
+.health-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #ccc;
+}
+.health-form input,
+.health-form select {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 15px;
+}
+.health-form input:focus,
+.health-form select:focus {
+    outline: 2px solid #5b9bd5;
+}
+
+/* Button */
+.gradient-btn {
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.gradient-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.6);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #0a0a14;
+    color: #888;
+    margin-top: 40px;
+}

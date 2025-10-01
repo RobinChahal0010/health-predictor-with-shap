@@ -1,0 +1,114 @@
+[
+  {
+    "keywords": ["bmi", "weight", "height", "body mass index", "wazan", "lambai"],
+    "answer": "BMI calculate karan layi weight te height chahidi hundi hai. Form fill karo te submit karo."
+  },
+  {
+    "keywords": ["tips", "health tips", "salamat", "tandrusti", "diet", "steps"],
+    "answer": "Zyada steps walk karo, pani wadh piya karo te balanced diet rakho."
+  },
+  {
+    "keywords": ["pdf", "report", "download", "report download"],
+    "answer": "PDF report download karan layi upar 'Download Report' button te click karo."
+  },
+  {
+    "keywords": ["email", "send report", "mail", "email result"],
+    "answer": "Email ch report paun layi 'Email Result' button use karo te email enter karo."
+  },
+  {
+    "keywords": ["sleep", "sleep hours", "neend"],
+    "answer": "Sahi neend layi 7-8 ghante rozana sona zaroori hai."
+  },
+  {
+    "keywords": ["water", "hydration", "pani", "water intake"],
+    "answer": "Rozana kam az kam 2-3 liters pani piya karo."
+  },
+  {
+    "keywords": ["stress", "anxiety", "tension", "pressure"],
+    "answer": "Stress ghataun layi meditation, walk, te deep breathing exercises karo."
+  },
+  {
+    "keywords": ["exercise", "workout", "fitness", "physical activity"],
+    "answer": "Rozana 30 minute exercise ya walk karna tandrusti layi faidemand hai."
+  },
+  {
+    "keywords": ["smoking", "cigarette", "tobacco"],
+    "answer": "Smoking bilkul chhaddo, eh sehat nu bahut nuksan pohcha sakda hai."
+  },
+  {
+    "keywords": ["alcohol", "drinking", "sharaab"],
+    "answer": "Alcohol consumption nu limit rakho ya avoid karo for better health."
+  },
+  {
+    "keywords": ["diet", "nutrition", "food", "khana"],
+    "answer": "Balanced diet rakho jisme vegetables, fruits, protein, te whole grains hon."
+  },
+  {
+    "keywords": ["steps", "walking", "physical activity"],
+    "answer": "Rozana kam az kam 8000-10000 steps walk karna sehatmand hai."
+  },
+  {
+    "keywords": ["heart", "cardio", "blood pressure", "bp"],
+    "answer": "Healthy heart layi regular cardio exercise te low salt diet follow karo."
+  },
+  {
+    "keywords": ["sugar", "diabetes", "glucose"],
+    "answer": "Blood sugar control layi sugary foods limit karo te exercise zaroori hai."
+  },
+  {
+    "keywords": ["cholesterol", "lipids", "fat"],
+    "answer": "Cholesterol control layi oily foods kam karo te fiber-rich diet rakho."
+  },
+  {
+    "keywords": ["mental health", "mind", "psychology", "brain"],
+    "answer": "Mental health layi meditation, hobbies, te positive thinking zaroori hai."
+  },
+  {
+    "keywords": ["obesity", "overweight", "weight loss"],
+    "answer": "Healthy weight layi diet control te regular exercise follow karo."
+  },
+  {
+    "keywords": ["immune system", "immunity", "disease prevention"],
+    "answer": "Immunity boost layi vitamin C, fruits, vegetables, te proper sleep zaroori hai."
+  },
+  {
+    "keywords": ["faq", "help", "questions", "how to use"],
+    "answer": "Form fill karo, submit karo, result dekho, te tips follow karo. PDF download ya email kar sakde ho."
+  },
+  {
+    "keywords": ["accuracy", "confidence", "prediction", "result"],
+    "answer": "Prediction confidence percentage nal dikhaya jaega, jinna zyada score, ohna accurate result."
+  },
+  {
+    "keywords": ["update", "refresh", "restart", "reload"],
+    "answer": "Page reload karo ya form dobara fill karo to get new prediction."
+  },
+  {
+    "keywords": ["language", "English", "Punjabi", "change language"],
+    "answer": "Language change karan layi top right corner te available options use karo."
+  },
+  {
+    "keywords": ["faq", "question", "common issues", "problems"],
+    "answer": "Koi issue aave ta contact support ya chat feature use karo for help."
+  },
+  {
+    "keywords": ["feature", "functionality", "how it works"],
+    "answer": "App health prediction layi user inputs le ke ML model run karda hai, te personalized tips provide karda hai."
+  },
+  {
+    "keywords": ["explanation", "shap", "feature impact", "tip details"],
+    "answer": "Har input feature layi SHAP value dikhayi jaandi hai jo risk increase ya decrease indicate kardi hai."
+  },
+  {
+    "keywords": ["risk", "high risk", "low risk", "health score"],
+    "answer": "Prediction tuhade health risk score nu show karda hai, jithe high score matlab higher risk."
+  },
+  {
+    "keywords": ["improvement", "better health", "lifestyle change"],
+    "answer": "Health improve karan layi healthy diet, regular exercise, neend, hydration te stress management follow karo."
+  },
+  {
+    "keywords": ["motivation", "reminder", "alert", "tips reminder"],
+    "answer": "Daily reminders layi apne phone ya calendar te set karo for exercise, hydration, te sleep."
+  }
+]

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Coach</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    background: #000; 
+    color: #fff;
+    overflow-x: hidden;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #000; 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.navbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+}
+.navbar .nav-links a:hover {
+    color: #a855f7;
+}
+.navbar .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background: #2575fc;
+    transition: 0.3s;
+}
+.navbar .nav-links a:hover::after {
+    width: 100%;
+}
+
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: #000;
+}
+.hero h1 {
+    font-size: 40px;
+}
+.hero p {
+    font-size: 18px;
+    color: #bbb;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #111; 
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.health-form {
+    display: flex;
+    flex-direction: column;
+}
+.health-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #ccc;
+}
+.health-form input,
+.health-form select {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #000; /* black input fields */
+    color: #fff;
+    font-size: 15px;
+}
+.health-form input:focus,
+.health-form select:focus {
+    outline: 2px solid #5b9bd5;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(37, 117, 252, 0.5);
+}
+
+.gradient-btn {
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.gradient-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(148,187,233,0.6);
+}
+
+.gradient-text {
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+    color: #888;
+}
+
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 500px;
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    z-index: 200;
+}
+.chatbot-header {
+    background: #000;
+    padding: 15px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.chatbot-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #111;
+    color: #fff;
+}
+.chatbot-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+.chatbot-message.user {
+    background: #2575fc;
+    color: #fff;
+    align-self: flex-end;
+}
+.chatbot-message.bot {
+    background: #222;
+    color: #fff;
+    align-self: flex-start;
+}
+.chatbot-input-container {
+    display: flex;
+    border-top: 1px solid #333;
+    background: #000;
+}
+#chatInput {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+#chatInput::placeholder {
+    color: #aaa;
+}
+#chatSendBtn {
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    border: none;
+    color: #fff;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#chatSendBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(148,187,233,0.5);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(50px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-50px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5);}
+    100% { opacity: 1; transform: scale(1);}
+}
+
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🧑AI Health Coach</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+        <form method="get" action="/" style="display:inline;">
+            <select name="lang" onchange="this.form.submit()" 
+                    style="background:#1a1a2e; color:white; border:none; padding:5px; border-radius:5px;">
+                <option value="en" {% if lang == 'en' %}selected{% endif %}>🇬🇧 EN</option>
+                <option value="hi" {% if lang == 'hi' %}selected{% endif %}>🇮🇳 HI</option>
+                <option value="pa" {% if lang == 'pa' %}selected{% endif %}>🇮🇳 PA</option>
+            </select>
+        </form>
+    </li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+    <h1>
+        Your AI Powered <span class="gradient-text">Health Advisor</span>
+    </h1>
+    <p>Track lifestyle, predict risks & stay healthier every day 🚀</p>
+</section>
+
+    
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 py-4 mt-10">
+    <p class="text-center text-sm">
+        © 2025 AI Health Coach | Designed with ❤️ in <span class="font-semibold text-yellow-400">Patiala</span> 
+    </p>
+</footer>
+
+</body>
+</html>

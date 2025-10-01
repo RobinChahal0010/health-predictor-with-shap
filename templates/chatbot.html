@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="flex justify-center mt-10">
+  <div class="flex flex-col w-full max-w-md bg-white rounded-2xl shadow-xl p-4 h-[500px]">
+    <h2 class="text-2xl font-bold mb-4 text-center text-purple-600">Health Chatbot 🤖</h2>
+
+    <div id="chatBox" class="flex-1 overflow-y-auto p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+
+    <div class="mt-2 flex">
+      <input id="chatInput" type="text" placeholder="Type in English/Hinglish/Punjabi"
+        class="flex-1 border rounded-l-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <button onclick="sendMessage()"
+        class="bg-purple-600 text-white px-4 rounded-r-xl hover:opacity-90 transition">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function createBubble(text, sender) {
+    let p = document.createElement("p");
+    p.innerHTML = text;
+    p.className = "p-2 rounded-xl max-w-[80%] break-words";
+    if(sender === "user") {
+        p.classList.add("bg-purple-600", "text-white", "ml-auto");
+    } else {
+        p.classList.add("bg-gray-200", "text-gray-900", "mr-auto");
+    }
+    return p;
+}
+
+function sendMessage() {
+    let msg = document.getElementById("chatInput").value.trim();
+    if(!msg) return;
+
+    let chatBox = document.getElementById("chatBox");
+    chatBox.appendChild(createBubble(msg, "user"));
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    fetch("/chatbot", {
+        method: "POST",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({message: msg})
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.appendChild(createBubble(data.response, "bot"));
+        chatBox.scrollTop = chatBox.scrollHeight;
+        document.getElementById("chatInput").value = "";
+    });
+}
+
+document.getElementById("chatInput").addEventListener("keypress", function(e){
+    if(e.key === "Enter") sendMessage();
+});
+</script>
+{% endblock %}
